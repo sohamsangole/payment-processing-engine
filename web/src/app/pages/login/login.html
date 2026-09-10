@@ -12,6 +12,12 @@
       <p class="page-subtitle">Enter your credentials to access PayEngine</p>
     </div>
 
+    @if (errorMessage()) {
+      <div class="alert alert-error">
+        {{ errorMessage() }}
+      </div>
+    }
+
     <form (ngSubmit)="onSubmit()" class="login-form">
       <div class="form-group">
         <label for="username">Username</label>
@@ -57,8 +63,12 @@
         </div>
       </div>
 
-      <button type="submit" class="btn-submit">
-        Log In
+      <button type="submit" class="btn-submit" [disabled]="isLoading()">
+        @if (isLoading()) {
+          <span>Logging in...</span>
+        } @else {
+          <span>Log In</span>
+        }
       </button>
     </form>
 
